@@ -9,8 +9,8 @@ class Client:
       self.IP = IP
       self.port = port
       self.socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_STREAM)
+      print("connecting to socket: IP", self.IP, "port", self.port)
       self.socket.connect((defaultIP, self.port))
-      print("initialized on IP", self.IP, "port", self.port)
     def main(self):
        while True:
         chunks = []
