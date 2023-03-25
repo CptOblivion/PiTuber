@@ -7,6 +7,7 @@ bufferSize = 1024
 class Client:
     def __init__(self):
       self.socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
+      self.socket.bind(trackerIP, trackerPort)
       print("initialized")
     def main(self):
        while True:
