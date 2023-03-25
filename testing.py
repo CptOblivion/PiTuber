@@ -14,7 +14,7 @@ class Client:
     def main(self):
        while True:
         data, addr = self.socket.recvfrom(bufferSize)
-        print(addr, ":", data)
+        print(addr, ":", "{}".format(data[0]))
 
 if __name__ == "__main__":
   IP = defaultIP
