@@ -8,8 +8,8 @@ class Client:
     def __init__(self, IP, port):
       self.IP = IP
       self.port = port
-      self.socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
-      self.socket.bind((defaultIP, self.port))
+      self.socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_STREAM)
+      self.socket.connect((defaultIP, self.port))
       print("initialized on IP", self.IP, "port", self.port)
     def main(self):
        while True:
@@ -17,6 +17,7 @@ class Client:
         while True:
           data = self.socket.recvfrom(bufferSize)
           if not data:
+            chunks.append('-')
             break
           chunks.append(data)
         print(b''.join(chunks))
