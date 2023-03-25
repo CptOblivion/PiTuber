@@ -7,7 +7,12 @@ bufferSize = 1024
 class Client:
     def __init__(self):
       self.socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
+      print("initialized")
     def main(self):
        while True:
           data, addr = self.socket.recvfrom(bufferSize)
           print(data)
+
+if __name__ == "__main__":
+   client = Client()
+   client.main()
