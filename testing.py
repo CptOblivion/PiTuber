@@ -8,17 +8,17 @@ class Client:
     def __init__(self, IP, port):
       self.IP = IP
       self.port = port
-      self.socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_STREAM)
-      print("connecting to socket: IP", self.IP, "port", self.port)
-      self.socket.connect((defaultIP, self.port))
+      self.socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
+      # print("connecting to socket: IP", self.IP, "port", self.port)
+      # self.socket.connect((self.IP, self.port))
     def main(self):
        while True:
         chunks = []
         while True:
-          data = self.socket.recvfrom(bufferSize)
+          data, server = self.socket.recvfrom(bufferSize)
           if not data:
-            chunks.append('-')
             break
+          print(server)
           chunks.append(data)
         print(b''.join(chunks))
 
