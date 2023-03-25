@@ -1,19 +1,35 @@
-import socket
+import socket, sys, os
 
-trackerIP = "127.0.0.1"
-trackerPort = 11573
+defaultIP = "127.0.0.1"
+defaultPort = 11573
 bufferSize = 1024
 
 class Client:
-    def __init__(self):
+    def __init__(self, IP, port):
+      self.IP = IP
+      self.port = port
       self.socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
-      self.socket.bind((trackerIP, trackerPort))
-      print("initialized")
+      self.socket.bind((defaultIP, self.port))
+      print("initialized on IP", self.IP, "port", self.port)
     def main(self):
        while True:
-          data, addr = self.socket.recvfrom(bufferSize)
-          print(data)
+        data, addr = self.socket.recvfrom(bufferSize)
+        print(addr, ":", data)
 
 if __name__ == "__main__":
-   client = Client()
-   client.main()
+  IP = defaultIP
+  port = defaultPort
+  if len(sys.argv) > 1:
+    try:
+      port = int(sys.argv[1])
+    except ValueError:
+      print("invalid port", sys.argv[1])
+  client = Client(IP, port)
+  try:
+    client.main()
+  except KeyboardInterrupt:
+    print('Interrupted')
+    try:
+        sys.exit(130)
+    except SystemExit:
+        os._exit(130)

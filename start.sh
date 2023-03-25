@@ -1,5 +1,3 @@
 #!/bin/bash
 
-TRACKPORT=11573
-
-python testing.py
+python testing.py $1
