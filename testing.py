@@ -13,8 +13,13 @@ class Client:
       print("initialized on IP", self.IP, "port", self.port)
     def main(self):
        while True:
-        data, addr = self.socket.recvfrom(bufferSize)
-        print(addr, ":", "{}".format(data[0]))
+        chunks = []
+        while True:
+          data = self.socket.recvfrom(bufferSize)
+          if not data:
+            break
+          chunks.append(data)
+        print(b''.join(chunks))
 
 if __name__ == "__main__":
   IP = defaultIP
