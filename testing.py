@@ -1,6 +1,6 @@
 import socket, sys, os
 import struct
-from logger import log, borderTypes
+from logger import log
 
 defaultIP = "127.0.0.1"
 defaultPort = 11573
@@ -33,7 +33,6 @@ class Client:
         faceQuat = (self.decodeNext('f'), self.decodeNext('f'), self.decodeNext('f'), self.decodeNext('f'))
         faceEuler = (self.decodeNext('f'), self.decodeNext('f'), self.decodeNext('f'))
         faceTranslation = (self.decodeNext('f'), self.decodeNext('f'), self.decodeNext('f'))
-        log.startFrame()
         log.print('       timestamp |', log.timestamp(timestamp))
         log.print('         face id |', faceId)
         log.print('         success |', success)
@@ -44,7 +43,6 @@ class Client:
         log.print('face translation |', log.cleanFloatList(faceTranslation))
         log.print('  face quat ]:<  |', log.cleanFloatList(faceQuat))
         log.print('      face euler |', log.cleanFloatList(faceEuler))
-        log.endFrame()
       except Exception as e:
         log.print('failed message:', e)
       self.done()

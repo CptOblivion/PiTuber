@@ -24,17 +24,6 @@ class log:
     log.__resetHeight = 0
 
     for line in log.__lines:
-      if line is None:
-        line = 'ERROR: NONETYPE LINE'
-      elif type(line) == _Frame:
-        if inFrame is None:
-          inFrame = line
-          line = inFrame.printTop()
-        else:
-          line = inFrame.printBottom()
-          inFrame = None
-      elif inFrame is not None:
-        line = inFrame.print(line)
       log.__resetWidth = max(log.__resetWidth, len(line))
       line += '\n'
       log.__resetHeight+= line.count('\n')
