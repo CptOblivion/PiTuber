@@ -56,9 +56,7 @@ class Client:
       return val[0]
 
     def done(self):
-      log.startFrame()
       log.print('unread bytes: ', len(self.message) - self.position)
-      log.endFrame()
       log.send()
       self.resetMessage()
 
