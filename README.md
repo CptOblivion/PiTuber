@@ -7,8 +7,12 @@ This is mostly just messing around and trying to kludge together something that 
 
 Requirements (tentative, changing)
 
+Running OpenSeeFace on a raspberry pi, even with lowest tracking quality, is pretty slow (~4fps on a pi 3). Probably not worth doing.
 - tracking software: https://github.com/emilianavt/OpenSeeFace
   - this requires ONNX runtime - pip can't find wheel for pi, instead get it from https://github.com/nknytk/built-onnxruntime-for-raspberrypi-linux
     - navigate to corresponding directory for the debian version, and `pip install` your wheel file
   - may need to `sudo apt-get install libatlas-base-dev` for numpy
   - opencv might take too long to insall, try this: https://singleboardblog.com/install-python-opencv-on-raspberry-pi/
+
+Alternately, run OpenSeeFace on a PC and send the socket to the pi:
+- when starting OpenSeeFace, use the `-i` argument, with the IP address of the pi that will be reading the tracking data.
