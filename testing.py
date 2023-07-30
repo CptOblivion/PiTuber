@@ -67,14 +67,18 @@ class Client:
 
 
 if __name__ == '__main__':
-  IP = defaultIP
+  address = defaultIP
   port = defaultPort
   if len(sys.argv) > 1:
-    try:
-      port = int(sys.argv[1])
-    except ValueError:
-      print('invalid port', sys.argv[1])
-  client = Client(IP, port)
+    address = sys.argv[1]
+    if ':' in address:
+      [address, port] = address.split(':')
+
+      if address == '' or address == 'localhost':
+        # allow for assigning just port
+        address = defaultIP
+      port = int(port)
+  client = Client(address, port)
   try:
     client.main()
   except KeyboardInterrupt:
