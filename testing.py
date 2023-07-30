@@ -12,7 +12,7 @@ class Client:
       self.socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
       print('binding to socket '+ str(self.IP) + ':' + str(self.port))
       print()
-      self.socket.bind((self.IP, self.port))
+      self.socket.bind(('0.0.0.0', self.port))
       self.message=bytes([])
       self.position = 0
     def main(self):
@@ -73,7 +73,6 @@ if __name__ == '__main__':
     address = sys.argv[1]
     if ':' in address:
       [address, port] = address.split(':')
-
       if address == '' or address == 'localhost':
         # allow for assigning just port
         address = defaultIP
