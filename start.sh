@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python testing.py $1
+python main.py -a 192.168.1.2
