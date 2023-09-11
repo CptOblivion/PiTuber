@@ -42,8 +42,10 @@ class log:
     log.__lines = [] # reset
     sys.stdout.flush()
 
+  def cleanFloat(f):
+    return format(f, '+1.3f')
   def cleanFloatList(floatlist):
-    return '[ ' + ' | '.join(format(f, '+1.3f') for f in floatlist) + ' ]'
+    return '[ ' + ' | '.join(log.cleanFloat(f) for f in floatlist) + ' ]'
 
   def timestamp(timestamp):
     return datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S.%f')
