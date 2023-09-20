@@ -22,10 +22,10 @@ class Client:
         if host[0] == self.IP:
           self.message = data
           dataholder = self.decode()
-          self.driver.sendPosition(0, -40, 40, dataholder.faceEuler[1])
-          self.driver.sendPosition(1, 35, 140, dataholder.faceEuler[2])
-          self.driver.sendPosition(2, 100, 220, dataholder.faceEuler[0] % 360)
-          self.driver.sendPosition(8, 0, 1, 1)
+          self.driver.go(0, -40, 40, dataholder.faceEuler[1])
+          self.driver.go(1, 35, 140, dataholder.faceEuler[2])
+          self.driver.go(2, 100, 220, dataholder.faceEuler[0] % 360)
+          self.driver.go(8, 0, 1, 1)
           log.send()
 
     def decode(self) -> SimpleNamespace:

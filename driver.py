@@ -13,9 +13,8 @@ class Driver:
     self.motors = [None] * motorCount
     main = threading.Thread(target = self._main)
     main.start()
-    pass
 
-  def sendPosition(self, motorIndex, left, right, val):
+  def go(self, motorIndex, left, right, val):
     if self.motors[motorIndex] is None:
       self.motors[motorIndex] = Motor(self.target, left, right, motorIndex)
     self.motors[motorIndex].setPos(val)
@@ -50,10 +49,13 @@ class Motor:
     self.fromTime = now
 
   def update(self):
+    if self.toPos == None:
+      return
     now = datetime.now()
     # get lerp pos
     dur = self.toTime - self.fromTime
     t = max(0, min(1, (self.fromTime - now) / dur))
     # lerp
     self.value = (self.toPos * t) + ((1 - t) * self.fromPos)
+    print(self.index, t, self.value)
     self.target.sendPosition(self.index, self.left, self.right, self.value)
