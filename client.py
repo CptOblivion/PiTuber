@@ -2,9 +2,10 @@ import socket
 import struct
 from logger import log
 from types import SimpleNamespace
+import servo, coms
 
 class Client:
-    def __init__(self, IP, port, silent=False):
+    def __init__(self, IP, port, local, silent=False):
       self.IP = IP
       self.port = port
       self.socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
@@ -13,12 +14,23 @@ class Client:
       self.socket.bind(('0.0.0.0', self.port))
       self.message=bytes([])
       self.position = 0
+      if local:
+        self.driver = servo.Servo()
+      else:
+        self.driver = coms.Coms()
+
     def main(self):
       while (True):
         data, host = self.socket.recvfrom(2048)
         if host[0] == self.IP:
           self.message = data
-          self.decode()
+          dataholder = self.decode()
+          self.driver.sendPosition(0, -40, 40, dataholder.faceEuler[1])
+          self.driver.sendPosition(1, 35, 140, dataholder.faceEuler[2])
+          self.driver.sendPosition(2, 100, 220, dataholder.faceEuler[0] % 360)
+          self.driver.sendPosition(8, 0, 1, 1)
+          log.send()
+
     def decode(self) -> SimpleNamespace:
       dataHolder = SimpleNamespace()
       try:
@@ -57,11 +69,8 @@ class Client:
 
     def done(self):
       log.print('unread bytes: ', len(self.message) - self.position)
-      log.send()
       self.resetMessage()
-
 
     def resetMessage(self):
       self.message=bytes([])
       self.position = 0
-
