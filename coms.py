@@ -28,10 +28,10 @@ class Coms:
 
     def sendPosition(self, motor, left, right, val):
         # TODO: allow custom servo limits
-        val = util.mapRange(left, right, val, 1)
-        log.print("servo ", motor, " val: ", log.cleanFloat(val), " actual ", int(val * 0xfe))
+        val = util.mapRange(left, right, val, 0xfe)
+        log.print("servo ", motor, " val: ", log.cleanFloat(val), " actual ", int(val))
         try:
-            self._ser.write([motor, int(val * 0xfe), 0xff])
+            self._ser.write([motor, int(val), 0xff])
         except:
             # retry connection once
             self.__connect()

@@ -12,6 +12,6 @@ class Servo:
 
   def sendPosition(self, motor, left, right, val):
       # TODO: allow custom servo limits
-      val = util.mapRange(left, right, val, range)
-      log.print("servo ", motor, " val: ", log.cleanFloat(val), " actual ", int(val * 0xfe))
-      self.kit.servo[motor].angle = val
+      outval = util.mapRange(left, right, val, range)
+      log.print("servo ", motor, " val: ", log.cleanFloat(outval), " actual ", outval)
+      self.kit.servo[motor].angle = outval
