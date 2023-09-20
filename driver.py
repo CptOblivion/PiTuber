@@ -21,11 +21,12 @@ class Driver:
     self.motors[motorIndex].setPos(val)
 
   def _main(self):
-    for motor in self.motors:
-      if motor is None:
-        continue
-      motor.update()
-    time.sleep(0.05)
+    while True:
+      for motor in self.motors:
+        if motor is None:
+          continue
+        motor.update()
+      time.sleep(0.05)
 
 class Motor:
   def __init__(self, target, left, right, index) -> None:
