@@ -8,7 +8,7 @@ channelCount = 16
 class Servo:
   def __init__(self) -> None:
     self.kit = ServoKit(channels=channelCount)
-    for i in servoRange(channelCount):
+    for i in range(channelCount):
        self.kit.servo[i].actuation_range = servoRange
 
   def sendPosition(self, motor, left, right, val):
