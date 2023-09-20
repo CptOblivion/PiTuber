@@ -52,8 +52,11 @@ class Client:
         log.print('  face quat ]:<  |', log.cleanFloatList(faceQuat))
         log.print('      face euler |', log.cleanFloatList(faceEuler))
         self.driver.sendPosition(0, -40, 40, faceEuler[1])
+        log.print(faceEuler[1])
         self.driver.sendPosition(1, 35, 140, faceEuler[2])
+        log.print(faceEuler[2])
         self.driver.sendPosition(2, 100, 220, faceEuler[0] % 360)
+        log.print(faceEuler[0])
         self.driver.sendPosition(8, 0, 1, 1)
 
 
