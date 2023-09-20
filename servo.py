@@ -1,5 +1,6 @@
 from adafruit_servokit import ServoKit
 from logger import log
+import util
 
 range = 160
 
@@ -11,10 +12,6 @@ class Servo:
 
   def sendPosition(self, motor, left, right, val):
       # TODO: allow custom servo limits
-      val = mapRange(left, right, val)
+      val = util.mapRange(left, right, val, range)
       log.print("servo ", motor, " val: ", log.cleanFloat(val), " actual ", int(val * 0xfe))
       self.kit.servo[motor].angle = val
-
-
-def mapRange(left, right, val):
-  return min(1, max(0, (val - left) / (right - left))) * range
