@@ -20,6 +20,8 @@ Running OpenSeeFace on a raspberry pi, even with lowest tracking quality, is pre
       ```
   - opencv might take too long to insall, try this: https://singleboardblog.com/install-python-opencv-on-raspberry-pi/
   - for raspberry pi local run, `sudo pip3 install adafruit-circuitpython-servokit`
+    - don't forget to enable I2C:
+      - `sudo raspi-config` -> Interface Options -> I2C
 
 Alternately, run OpenSeeFace on a PC and send the socket to the pi:
 - when starting OpenSeeFace, use the `-i` argument, with the IP address of the pi that will be reading the tracking data.
