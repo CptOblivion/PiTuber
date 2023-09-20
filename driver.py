@@ -12,10 +12,10 @@ class Driver:
     self.motors = [None] * motorCount
     pass
 
-  def  sendPosition(self, motor, left, right, val):
-    if self.motors[motor] is None:
-      self.motors[motor] = Motor(self.target, left, right)
-    self.motors[motor].setPos(val)
+  def sendPosition(self, motorIndex, left, right, val):
+    if self.motors[motorIndex] is None:
+      self.motors[motorIndex] = Motor(self.target, left, right, motorIndex)
+    self.motors[motorIndex].setPos(val)
 
   def update(self):
     for motor in self.motors:
