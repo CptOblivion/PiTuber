@@ -2,7 +2,7 @@ import socket
 import struct
 from logger import log
 from types import SimpleNamespace
-import servo, coms
+import driver
 
 class Client:
     def __init__(self, IP, port, local, silent=False):
@@ -14,10 +14,7 @@ class Client:
       self.socket.bind(('0.0.0.0', self.port))
       self.message=bytes([])
       self.position = 0
-      if local:
-        self.driver = servo.Servo()
-      else:
-        self.driver = coms.Coms()
+      self.driver = driver.Driver(local)
 
     def main(self):
       while (True):
