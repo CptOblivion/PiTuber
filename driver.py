@@ -1,5 +1,6 @@
 import servo, coms
 from datetime import datetime
+import threading, time
 
 motorCount = 16
 
@@ -10,6 +11,8 @@ class Driver:
     else:
       self.target = coms.Coms()
     self.motors = [None] * motorCount
+    main = threading.Thread(target = self._main)
+    main.start()
     pass
 
   def sendPosition(self, motorIndex, left, right, val):
@@ -17,11 +20,12 @@ class Driver:
       self.motors[motorIndex] = Motor(self.target, left, right, motorIndex)
     self.motors[motorIndex].setPos(val)
 
-  def update(self):
+  def _main(self):
     for motor in self.motors:
       if motor is None:
         continue
       motor.update()
+    time.sleep(0.05)
 
 class Motor:
   def __init__(self, target, left, right, index) -> None:
