@@ -2,12 +2,14 @@ import socket, sys, os
 import struct
 from logger import log
 import coms
+import servo
+
 
 defaultIP = "127.0.0.1"
 defaultPort = 11573
 
 class Client:
-    def __init__(self, IP, port):
+    def __init__(self, IP, port, local):
       self.IP = IP
       self.port = port
       self.socket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
@@ -16,7 +18,10 @@ class Client:
       self.socket.bind(('0.0.0.0', self.port))
       self.message=bytes([])
       self.position = 0
-      self.coms = coms.Coms()
+      if local:
+        self.driver = servo.Servo()
+      else:
+        self.driver = coms.Coms()
 
     def main(self):
       while (True):
@@ -46,10 +51,10 @@ class Client:
         log.print('face translation |', log.cleanFloatList(faceTranslation))
         log.print('  face quat ]:<  |', log.cleanFloatList(faceQuat))
         log.print('      face euler |', log.cleanFloatList(faceEuler))
-        self.coms.sendPosition(0, -40, 40, faceEuler[1])
-        self.coms.sendPosition(1, 35, 140, faceEuler[2])
-        self.coms.sendPosition(2, 100, 220, faceEuler[0] % 360)
-        self.coms.sendPosition(8, 0, 1, 1)
+        self.driver.sendPosition(0, -40, 40, faceEuler[1])
+        self.driver.sendPosition(1, 35, 140, faceEuler[2])
+        self.driver.sendPosition(2, 100, 220, faceEuler[0] % 360)
+        self.driver.sendPosition(8, 0, 1, 1)
 
 
       except Exception as e:
