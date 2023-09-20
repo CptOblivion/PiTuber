@@ -11,6 +11,7 @@ if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument('-a', '--address')
   parser.add_argument('-m', '-mute', action='store_true')
+  parser.add_argument('-l', '-local', action='store_true')
   args = parser.parse_args()
   if args.address is not None:
     address = args.address
@@ -20,7 +21,7 @@ if __name__ == '__main__':
         # allow for assigning just port
         address = defaultIP
       port = int(port)
-  client = Client(address, port)
+  client = Client(address, port, args.local)
   try:
     client.main()
   except KeyboardInterrupt:
