@@ -49,13 +49,16 @@ class Motor:
     self.fromTime = now
 
   def update(self):
-    if self.toPos == None:
-      return
-    now = datetime.now()
-    # get lerp pos
-    dur = self.toTime - self.fromTime
-    t = max(0, min(1, (self.fromTime - now) / dur))
-    # lerp
-    self.value = (self.toPos * t) + ((1 - t) * self.fromPos)
-    print(self.index, t, self.value)
-    self.target.sendPosition(self.index, self.left, self.right, self.value)
+    try:
+      if self.toPos == None:
+        return
+      now = datetime.now()
+      # get lerp pos
+      dur = self.toTime - self.fromTime
+      t = max(0, min(1, (self.fromTime - now) / dur))
+      # lerp
+      self.value = (self.toPos * t) + ((1 - t) * self.fromPos)
+      print(self.index, t, self.value)
+      self.target.sendPosition(self.index, self.left, self.right, self.value)
+    except Exception as e:
+      print(e)
