@@ -3,6 +3,7 @@ from datetime import datetime
 import threading, time
 
 motorCount = 16
+delta = 0.005
 
 class Driver:
   def __init__(self, local) -> None:
@@ -25,7 +26,7 @@ class Driver:
         if motor is None:
           continue
         motor.update()
-      time.sleep(0.01)
+      time.sleep(delta)
 
 class Motor:
   def __init__(self, target, left, right, index) -> None:
