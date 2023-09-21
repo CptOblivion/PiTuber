@@ -1,3 +1,3 @@
 cd ../OpenSeeFace
 
-python facetracker.py --gaze-tracking 0 --model -3
+python3 facetracker.py --gaze-tracking 0 --model -3
