@@ -62,7 +62,6 @@ class Motor:
       t = max(0, min(1, (now - self.fromTime) / dur))
       # lerp
       self.value = (self.toPos * t) + ((1 - t) * self.fromPos)
-      print(self.index, t, self.value)
       self.target.sendPosition(self.index, self.left, self.right, self.value)
     except Exception as e:
       print(e)
