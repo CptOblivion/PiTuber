@@ -29,7 +29,7 @@ class Coms:
     def sendPosition(self, motor, left, right, val):
         # TODO: allow custom servo limits
         val = util.mapRange(left, right, val, 0xfe)
-        log.print("servo ", motor, " val: ", log.cleanFloat(val), " actual ", int(val))
+        # log.print("servo ", motor, " val: ", log.cleanFloat(val), " actual ", int(val))
         try:
             self._ser.write([motor, int(val), 0xff])
         except:

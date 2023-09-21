@@ -1,6 +1,7 @@
 import servo, coms
 from datetime import datetime
 import threading, time
+from logger import log
 
 motorCount = 16
 delta = 0.005
@@ -19,6 +20,8 @@ class Driver:
     if self.motors[motorIndex] is None:
       self.motors[motorIndex] = Motor(self.target, left, right, motorIndex)
     self.motors[motorIndex].setPos(val)
+    log.print("servo ", motorIndex, " val: ", log.cleanFloat(val))
+
 
   def _main(self):
     while True:
