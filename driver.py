@@ -25,7 +25,7 @@ class Driver:
         if motor is None:
           continue
         motor.update()
-      time.sleep(0.05)
+      time.sleep(0.01)
 
 class Motor:
   def __init__(self, target, left, right, index) -> None:
