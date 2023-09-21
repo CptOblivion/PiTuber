@@ -25,3 +25,10 @@ Running OpenSeeFace on a raspberry pi, even with lowest tracking quality, is pre
 
 Alternately, run OpenSeeFace on a PC and send the socket to the pi:
 - when starting OpenSeeFace, use the `-i` argument, with the IP address of the pi that will be reading the tracking data.
+
+TODO:
+- optional motor speed limit
+- auto-calibrate center
+  - at startup
+  - triggerable?
+- smoothing

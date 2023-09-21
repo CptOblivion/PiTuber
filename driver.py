@@ -4,7 +4,7 @@ import threading, time
 from logger import log
 
 motorCount = 16
-delta = 0.005
+delta = 0.002
 
 class Driver:
   def __init__(self, local) -> None:
