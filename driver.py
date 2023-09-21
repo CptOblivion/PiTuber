@@ -45,7 +45,7 @@ class Motor:
     self.fromPos = self.value
     self.toPos = value
     #get diff of now and last update, to determine toTime
-    self.toTime = now - self.fromTime
+    self.toTime = now + (now - self.fromTime)
     self.fromTime = now
 
   def update(self):
