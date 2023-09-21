@@ -55,7 +55,7 @@ class Motor:
       now = datetime.now()
       # get lerp pos
       dur = self.toTime - self.fromTime
-      t = max(0, min(1, (self.fromTime - now) / dur))
+      t = max(0, min(1, (now - self.fromTime) / dur))
       # lerp
       self.value = (self.toPos * t) + ((1 - t) * self.fromPos)
       print(self.index, t, self.value)
