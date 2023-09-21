@@ -5,7 +5,9 @@ cd $(dirname "$0")
 pwd
 
 echo "starting tracker on screen tracker"
-screen -d -S tracker -m /tracker.sh
+screen -d -m -S tracker sh tracker.sh
 
 echo "starting servo controller on screen pituber"
-screen -d -S pituber -m ./start.sh
+screen -d -m -S pituber sh start.sh
+
+screen -ls
